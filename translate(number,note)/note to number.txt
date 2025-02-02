@@ -3,115 +3,183 @@ from mido import Message, MidiFile, MidiTrack
 
 #把音名、唱名等换成 MIDO相对应的数字
 #已完成
-def num(yin):                    
-    if yin == "A0" or yin =="a0":            #最低音 la
+# 简化了下并增加升降
+def num(noteName):
+    if noteName in ["A0", "a0"]:
         return 21
-    if yin == "B0" or yin == "b0":           #最低的si
+    elif noteName in ["A#0", "a#0", "Bb0", "bb0"]:
+        return 22
+    elif noteName in ["B0", "b0"]:
         return 23
-    if yin == "C1" or yin == "c1":           #低三个八度 do
+    elif noteName in ["C1", "c1"]:
         return 24
-    if yin == "D1" or yin == "d1":           #re
+    elif noteName in ["C#1", "c#1", "Db1", "db1"]:
+        return 25
+    elif noteName in ["D1", "d1"]:
         return 26
-    if yin == "E1" or yin == "e1":           #mi
+    elif noteName in ["D#1", "d#1", "Eb1", "eb1"]:
+        return 27
+    elif noteName in ["E1", "e1"]:
         return 28
-    if yin == "F1" or yin == "f1":           #fa
+    elif noteName in ["F1", "f1"]:
         return 29
-    if yin == "G1" or yin == "g1":           #so 或者说 sol
+    elif noteName in ["F#1", "f#1", "Gb1", "gb1"]:
+        return 30
+    elif noteName in ["G1", "g1"]:
         return 31
-    if yin == "A1" or yin == "a1":           #la
+    elif noteName in ["G#1", "g#1", "Ab1", "ab1"]:
+        return 32
+    elif noteName in ["A1", "a1"]:
         return 33
-    if yin == "B1" or yin == "b1":           #si
+    elif noteName in ["A#1", "a#1", "Bb1", "bb1"]:
+        return 34
+    elif noteName in ["B1", "b1"]:
         return 35
-    if yin == "C2" or yin == "c2":           #低两个八度 do
+    elif noteName in ["C2", "c2"]:
         return 36
-    if yin == "D2" or yin == "d2":           #re
+    elif noteName in ["C#2", "c#2", "Db2", "db2"]:
+        return 37
+    elif noteName in ["D2", "d2"]:
         return 38
-    if yin == "E2" or yin == "e2":           #mi
+    elif noteName in ["D#2", "d#2", "Eb2", "eb2"]:
+        return 39
+    elif noteName in ["E2", "e2"]:
         return 40
-    if yin == "F2" or yin == "f2":           #fa
+    elif noteName in ["F2", "f2"]:
         return 41
-    if yin == "G2" or yin == "g2":           #so 或者说 sol
+    elif noteName in ["F#2", "f#2", "Gb2", "gb2"]:
+        return 42
+    elif noteName in ["G2", "g2"]:
         return 43
-    if yin == "A2" or yin == "a2":           #la
+    elif noteName in ["G#2", "g#2", "Ab2", "ab2"]:
+        return 44
+    elif noteName in ["A2", "a2"]:
         return 45
-    if yin == "B2" or yin == "b2":           #si
+    elif noteName in ["A#2", "a#2", "Bb2", "bb2"]:
+        return 46
+    elif noteName in ["B2", "b2"]:
         return 47
-    if yin == "C3" or yin == "c3" or yin == ".do" or yin == ".1" or yin == ".Do" or yin == ".DO":          #低八度   do
+    elif noteName in ["C3", "c3"]:
         return 48
-    if yin == "D3" or yin == "d3" or yin == ".re" or yin == ".2" or yin == ".Re" or yin == ".RE":           #re
+    elif noteName in ["C#3", "c#3", "Db3", "db3"]:
+        return 49
+    elif noteName in ["D3", "d3"]:
         return 50
-    if yin == "E3" or yin == "e3" or yin == ".mi" or yin == ".3" or yin == ".Mi" or yin == ".MI":           #mi
+    elif noteName in ["D#3", "d#3", "Eb3", "eb3"]:
+        return 51
+    elif noteName in ["E3", "e3"]:
         return 52
-    if yin == "F3" or yin == "f3" or yin == ".fa" or yin == ".4" or yin == ".Fa" or yin == ".FA":           #fa
+    elif noteName in ["F3", "f3"]:
         return 53
-    if yin == "G3" or yin == "g3" or yin == ".so" or yin == ".sol" or yin == ".5" or yin == ".So" or yin == ".Sol" or yin == ".SO" or yin == ".SOL":   #so 或者说 sol
+    elif noteName in ["F#3", "f#3", "Gb3", "gb3"]:
+        return 54
+    elif noteName in ["G3", "g3"]:
         return 55
-    if yin == "A3" or yin == "a3" or yin == ".la" or yin == ".6" or yin == ".La" or yin == ".LA":            #la
+    elif noteName in ["G#3", "g#3", "Ab3", "ab3"]:
+        return 56
+    elif noteName in ["A3", "a3"]:
         return 57
-    if yin == "B3" or yin == "b3" or yin == ".si" or yin == ".7" or yin == ".Si" or yin == ".SI":             #si
+    elif noteName in ["A#3", "a#3", "Bb3", "bb3"]:
+        return 58
+    elif noteName in ["B3", "b3"]:
         return 59
-    #中音区
-    if yin == "C4" or yin == "c4" or yin == "C" or yin == "c" or yin == "1" or yin == 1 or yin == "do" or yin == "Do" or yin == "DO":       #中音do
+    elif noteName in ["C4", "c4"]:
         return 60
-    if yin == "D4" or yin == "d4" or yin == "D" or yin == "d" or yin == "2" or yin == 2 or yin == "re" or yin == "Re" or yin == "RE":        #中音re
+    elif noteName in ["C#4", "c#4", "Db4", "db4"]:
+        return 61
+    elif noteName in ["D4", "d4"]:
         return 62
-    if yin == "E4" or yin == "e4" or yin == "E" or yin == "e" or yin == "3" or yin == 3 or yin == "mi" or yin == "Mi" or yin == "MI":       #中音mi
+    elif noteName in ["D#4", "d#4", "Eb4", "eb4"]:
+        return 63
+    elif noteName in ["E4", "e4"]:
         return 64
-    if yin == "F4" or yin == "f4" or yin == "F" or yin == "f" or yin == "4" or yin == 4 or yin == "fa" or yin == "Fa" or yin == "FA":       #中音fa
+    elif noteName in ["F4", "f4"]:
         return 65
-    if yin == "G4" or yin == "g4" or yin == "G" or yin == "g" or yin == "5" or yin == 5 or yin == "so" or yin == "sol" or yin == "So" or yin == "Sol" or yin == "SO" or yin == "SOL":   #中音so  或者说 sol
+    elif noteName in ["F#4", "f#4", "Gb4", "gb4"]:
+        return 66
+    elif noteName in ["G4", "g4"]:
         return 67
-    if yin == "A4" or yin == "a4" or yin == "A" or yin == "a" or yin == "6" or yin == 6 or yin == "la" or yin == "La" or yin == "LA":       #中音la
+    elif noteName in ["G#4", "g#4", "Ab4", "ab4"]:
+        return 68
+    elif noteName in ["A4", "a4"]:
         return 69
-    if yin == "B4" or yin == "b4" or yin == "B" or yin == "b" or yin == "7" or yin == 7 or yin == "si" or yin == "Si" or yin == "SI":       #中音si
+    elif noteName in ["A#4", "a#4", "Bb4", "bb4"]:
+        return 70
+    elif noteName in ["B4", "b4"]:
         return 71
-    #高音区
-    if yin == "C5" or yin == "c5" or yin == "1." or yin == "do." or yin == "Do." or yin == "DO.":   #do
+    elif noteName in ["C5", "c5"]:
         return 72
-    if yin == "D5" or yin == "d5" or yin == "2." or yin == "re." or yin == "Re." or yin == "RE.":   #re 
+    elif noteName in ["C#5", "c#5", "Db5", "db5"]:
+        return 73
+    elif noteName in ["D5", "d5"]:
         return 74
-    if yin == "E5" or yin == "e5" or yin == "3." or yin == "mi." or yin == "Mi." or yin == "MI.":   #mi
+    elif noteName in ["D#5", "d#5", "Eb5", "eb5"]:
+        return 75
+    elif noteName in ["E5", "e5"]:
         return 76
-    if yin == "F5" or yin == "f5" or yin == "4." or yin == "fa." or yin == "Fa." or yin == "FA.":   #fa
+    elif noteName in ["F5", "f5"]:
         return 77
-    if yin == "G5" or yin == "g5" or yin == "5." or yin == "so." or yin == "So." or yin == "SO." or yin == "sol." or yin == "Sol." or yin == "SOL.":       #so 或者说是 sol
-        return 79 
-    if yin == "A5" or yin == "a5" or yin == "6." or yin == "la." or yin == "La." or yin == "LA.":   #la
+    elif noteName in ["F#5", "f#5", "Gb5", "gb5"]:
+        return 78
+    elif noteName in ["G5", "g5"]:
+        return 79
+    elif noteName in ["G#5", "g#5", "Ab5", "ab5"]:
+        return 80
+    elif noteName in ["A5", "a5"]:
         return 81
-    if yin == "B5" or yin == "b5" or yin == "7." or yin == "si." or yin == "Si." or yin == "SI.":   #si
+    elif noteName in ["A#5", "a#5", "Bb5", "bb5"]:
+        return 82
+    elif noteName in ["B5", "b5"]:
         return 83
-    #从此，退出常用区
-    #高两个八度
-    if yin == "C6" or yin == "c6":      #do
+    elif noteName in ["C6", "c6"]:
         return 84
-    if yin == "D6" or yin == "d6":      #re
+    elif noteName in ["C#6", "c#6", "Db6", "db6"]:
+        return 85
+    elif noteName in ["D6", "d6"]:
         return 86
-    if yin == "E6" or yin == "e6":      #mi
+    elif noteName in ["D#6", "d#6", "Eb6", "eb6"]:
+        return 87
+    elif noteName in ["E6", "e6"]:
         return 88
-    if yin == "F6" or yin == "f6":      #fa
+    elif noteName in ["F6", "f6"]:
         return 89
-    if yin == "G6" or yin == "g6":      #so
+    elif noteName in ["F#6", "f#6", "Gb6", "gb6"]:
+        return 90
+    elif noteName in ["G6", "g6"]:
         return 91
-    if yin == "A6" or yin == "a6":      #la
+    elif noteName in ["G#6", "g#6", "Ab6", "ab6"]:
+        return 92
+    elif noteName in ["A6", "a6"]:
         return 93
-    if yin == "B6" or yin == "b6":      #si
+    elif noteName in ["A#6", "a#6", "Bb6", "bb6"]:
+        return 94
+    elif noteName in ["B6", "b6"]:
         return 95
-    #高三个八度
-    if yin == "C7" or yin == "c7":       #do
+    elif noteName in ["C7", "c7"]:
         return 96
-    if yin == "D7" or yin == "d7":       #re
+    elif noteName in ["C#7", "c#7", "Db7", "db7"]:
+        return 97
+    elif noteName in ["D7", "d7"]:
         return 98
-    if yin == "E7" or yin == "e7":       #mi
+    elif noteName in ["D#7", "d#7", "Eb7", "eb7"]:
+        return 99
+    elif noteName in ["E7", "e7"]:
         return 100
-    if yin == "F7" or yin == "f7":       #fa
+    elif noteName in ["F7", "f7"]:
         return 101
-    if yin == "G7" or yin == "g7":       #so
+    elif noteName in ["F#7", "f#7", "Gb7", "gb7"]:
+        return 102
+    elif noteName in ["G7", "g7"]:
         return 103
-    if yin == "A7" or yin == "a7":       #la
+    elif noteName in ["G#7", "g#7", "Ab7", "ab7"]:
+        return 104
+    elif noteName in ["A7", "a7"]:
         return 105
-    if yin == "B7" or yin == "b7":       #si
+    elif noteName in ["A#7", "a#7", "Bb7", "bb7"]:
+        return 106
+    elif noteName in ["B7", "b7"]:
         return 107
-    #高四个八度
-    #最高音do
-    if yin == "C8" or yin == "c8" or yin == "highestdo" or yin == "hdo" or yin == "h1" or yin == "highest1":  #do
+    elif noteName in ["C8", "c8"]:
         return 108
+    else:
+        raise ValueError("Invalid note name")
